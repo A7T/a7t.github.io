@@ -55,7 +55,7 @@ sudo cat /etc/ssh/sshd_config |grep 'Client'
 
 echo "重载 sshd 服务："
 sudo systemctl reload sshd.service
-sudo systemctk status sshd.service
+sudo systemctl status sshd.service
 
 echo "增加虚拟内存："
 sudo mkdir /www
