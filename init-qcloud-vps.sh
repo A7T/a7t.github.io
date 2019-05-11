@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # -------------------------------------------------------------------------------
 # Filename:    init-qcloud-vps.sh
-# Revision:    1.0
+# Revision:    1.1
 # Date:        2019/05/10
 # Author:      A7T
 # Email:       a7t#4rt.top
@@ -31,6 +31,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 # -------------------------------------------------------------------------------
+# Version 1.1
+# 自动重载 sshd_config
+# epel-release
+# git2u-all → git2u
+#
 # Version 1.0
 # 最初的版本，存在好几处硬编码
 # 用于初始化腾讯云服务器
@@ -48,6 +53,10 @@ sudo sed -i 's/#ClientAliveCountMax 3/ClientAliveCountMax 3/g' /etc/ssh/sshd_con
 sudo sed -i 's/#ClientAliveInterval 0/ClientAliveInterval 30/g' /etc/ssh/sshd_config
 sudo cat /etc/ssh/sshd_config |grep 'Client'
 
+echo "重载 sshd 服务："
+sudo systemctl reload sshd.service
+sudo systemctk status sshd.service
+
 echo "增加虚拟内存："
 sudo mkdir /www
 sudo dd if=/dev/zero of=/www/swap bs=1M count=$(awk '($1=="MemTotal:"){mem=$2/1048576; print (mem==int(mem)?mem:int(mem+1))*2048+1}' /proc/meminfo)
@@ -59,6 +68,6 @@ sudo free -m
 
 echo "更新软件包："
 sudo yum update -y
-sudo yum install -y wget curl screen htop
+sudo yum install -y epel-release
 sudo yum install -y https://centos7.iuscommunity.org/ius-release.rpm
-sudo yum install -y git2u-all
+sudo yum install -y wget curl git2u screen htop
