@@ -33,7 +33,6 @@
 # -------------------------------------------------------------------------------
 # Version 1.1
 # 自动重载 sshd_config
-# epel-release
 # git2u-all → git2u
 #
 # Version 1.0
@@ -68,6 +67,5 @@ sudo free -m
 
 echo "更新软件包："
 sudo yum update -y
-sudo yum install -y epel-release
 sudo yum install -y https://centos7.iuscommunity.org/ius-release.rpm
 sudo yum install -y wget curl git2u screen htop
