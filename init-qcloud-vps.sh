@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # -------------------------------------------------------------------------------
 # Filename:    init-qcloud-vps.sh
-# Revision:    1.1
-# Date:        2019/05/10
+# Revision:    1.2
+# Date:        2019/05/12
 # Author:      A7T
 # Email:       a7t#4rt.top
 # Website:     https://a7t.ink/init-qcloud-vps.sh
@@ -31,6 +31,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 # -------------------------------------------------------------------------------
+# Version 1.2
+# git2u 与 Meza 冲突，所以暂时注释
+# 腾讯云服务器自带 EPEL 源，所以暂时注释
+#
 # Version 1.1
 # 自动重载 sshd_config
 # git2u-all → git2u
@@ -67,5 +71,7 @@ sudo free -m
 
 echo "更新软件包："
 sudo yum update -y
-sudo yum install -y https://centos7.iuscommunity.org/ius-release.rpm
-sudo yum install -y wget curl git2u screen htop
+sudo yum install -y wget curl git screen htop
+#sudo yum install -y epel-release
+#sudo yum install -y https://centos7.iuscommunity.org/ius-release.rpm
+#sudo yum install -y git2u
