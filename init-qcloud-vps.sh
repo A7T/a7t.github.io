@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # -------------------------------------------------------------------------------
 # Filename:    init-qcloud-vps.sh
-# Revision:    1.2
-# Date:        2019/05/12
+# Revision:    1.3
+# Date:        2019/06/01
 # Author:      A7T
 # Email:       a7t#4rt.top
 # Website:     https://a7t.ink/init-qcloud-vps.sh
@@ -31,6 +31,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 # -------------------------------------------------------------------------------
+# Version 1.3
+# 移除腾讯云自带的 EPEL 源
+# 暂时不需要装 Meza ，所以把 git2u 放回来
+#
 # Version 1.2
 # git2u 与 Meza 冲突，所以暂时注释
 # 腾讯云服务器自带 EPEL 源，所以暂时注释
@@ -44,11 +48,11 @@
 # 用于初始化腾讯云服务器
 
 echo "修改 /etc/hosts 文件："
-sudo sed -i 's/VM_[0-9]\+_\([0-9]\+\)_centos/ArgWK-\1/g' /etc/hosts
+sudo sed -i 's/VM_[0-9]\+_\([0-9]\+\)_centos/ArTest-\1/g' /etc/hosts
 sudo cat /etc/hosts
 
 echo "设置主机名："
-sudo hostnamectl set-hostname $(grep -oE 'ArgWK-[0-9]+' /etc/hosts |tail -1)
+sudo hostnamectl set-hostname $(grep -oE 'ArTest-[0-9]+' /etc/hosts |tail -1)
 sudo hostnamectl
 
 echo "修改 /etc/ssh/sshd_config 文件："
@@ -70,8 +74,7 @@ echo -e "#swap\n/www/swap\tswap\tswap\tdefaults\t0 0" |sudo tee /etc/fstab -a
 sudo free -m
 
 echo "更新软件包："
+sudo mv /etc/yum.repos.d/CentOS-Epel.repo /etc/yum.repos.d/CentOS-Epel.repo.bak
+sudo yum install -y https://centos7.iuscommunity.org/ius-release.rpm
 sudo yum update -y
-sudo yum install -y wget curl git screen htop
-#sudo yum install -y epel-release
-#sudo yum install -y https://centos7.iuscommunity.org/ius-release.rpm
-#sudo yum install -y git2u
+sudo yum install -y wget curl git2u screen htop bind-utils vim nano
