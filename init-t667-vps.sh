@@ -89,5 +89,5 @@ apt -t stretch-backports install -y shadowsocks-libev nginx-full
 
 # 更新系统
 screen -dmS upgrade \
-  apt dist-upgrade -y
-echo "正在后台更新系统，可以用 screen -r upgrade 查看"
+  bash -c "export LANG=en_US.UTF-8; export LANGUAGE=en_US:en; apt dist-upgrade -y"
+echo "正在后台更新软件包，可以用 screen -r upgrade 查看"
