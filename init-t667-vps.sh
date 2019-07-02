@@ -79,9 +79,12 @@ deb http://ftp.debian.org/debian stretch-backports main
 deb-src http://ftp.debian.org/debian stretch-backports main
 EOF
 
-# 更新系统
-apt update && apt dist-upgrade -y
+# 更新源
+apt update
 
 # 安装一些常用的软件包
 apt install -y wget curl git screen screenfetch vim nano mtr nmap dnsutils traceroute iftop iotop htop ntp netcat-openbsd openssl xz-utils
 apt -t stretch-backports install -y shadowsocks-libev nginx-full
+
+# 更新系统
+screen -S upgrade "apt upgrade -y"
