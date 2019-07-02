@@ -38,7 +38,7 @@
 # 最初的版本，存在好几处硬编码
 # 用于初始化都市丽人服务器
 
-# 修改 locales
+# 重置 locales
 # 我也不知道怎么搞比较优雅，不过目前这种写法凑合能跑也就是了
 sed -i "s/^\(# \)\?/# /g" /etc/locale.gen
 sed -i "s/^# \(en_US ISO-8859-1\)/\1/" /etc/locale.gen
@@ -46,9 +46,11 @@ sed -i "s/^# \(en_US.UTF-8 UTF-8\)/\1/" /etc/locale.gen
 sed -i "s/^# \(zh_CN GB2312\)/\1/" /etc/locale.gen
 sed -i "s/^# \(zh_CN.UTF-8 UTF-8\)/\1/" /etc/locale.gen
 dpkg-reconfigure --frontend noninteractive locales
-update-locale LANG=en_US.UTF-8 LANGUAGE=en_US:en
+
+# 修改 locales
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US:en
+update-locale LANG=en_US.UTF-8 LANGUAGE=en_US:en
 
 # 修改 timezone
 # 同上，先这么凑合
@@ -78,7 +80,7 @@ deb-src http://ftp.debian.org/debian stretch-backports main
 EOF
 
 # 更新系统
-apt update && apt dist-upgrade -yqq
+apt update && apt dist-upgrade -y
 
 # 安装一些常用的软件包
 apt install -y wget curl git screen screenfetch vim nano mtr nmap dnsutils traceroute iftop iotop htop ntp netcat-openbsd openssl xz-utils
