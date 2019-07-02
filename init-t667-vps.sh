@@ -51,6 +51,7 @@ dpkg-reconfigure --frontend noninteractive locales
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US:en
 update-locale LANG=en_US.UTF-8 LANGUAGE=en_US:en
+locale
 
 # 修改 timezone
 # 同上，先这么凑合
