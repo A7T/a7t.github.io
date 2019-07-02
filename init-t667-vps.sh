@@ -88,5 +88,6 @@ apt install -y wget curl git screen screenfetch vim nano mtr nmap dnsutils trace
 apt -t stretch-backports install -y shadowsocks-libev nginx-full
 
 # 更新系统
-screen -S upgrade \
+screen -dmS upgrade \
   apt dist-upgrade -y
+echo "正在后台更新系统，可以用 screen -r upgrade 查看"
