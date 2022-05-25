@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # -------------------------------------------------------------------------------
 # Filename:    6419bcf7.sh
-# Revision:    1.3
+# Revision:    1.1
 # Date:        2022/05/25
 # Author:      A7T
 # Email:       a7t#4rt.top
@@ -31,7 +31,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 # -------------------------------------------------------------------------------
-# Version 1.0
+# Version 1.1
 
 if [[ ${UID} != 0 ]]; then
     echo "Please run this script with sudo:"
@@ -41,6 +41,7 @@ fi
 
 echo "查找GRUB默认密码配置："
 sudo grep -oPz "cat <<EOF\nset superusers=root\npassword_pbkdf2 root grub.pbkdf2.sha512.10000.5A45748D892672FDA02DD3B6F7AE390AC6E6D532A600D4AC477D25C7D087644697D8A0894DFED9D86DC2A27F4E01D925C46417A225FC099C12DBD3D7D49A7425.2BD2F5BF4907DCC389CC5D165DB85CC3E2C94C8F9A30B01DACAA9CD552B731BA1DD3B7CC2C765704D55B8CD962D2AEF19A753CBE9B8464E2B1EB39A3BB4EAB08\nEOF" /etc/grub.d/00_header
+echo ""
 
 if [[ $? != 0 ]]; then
     echo "未找到GRUB默认密码配置，程序退出。"
@@ -69,7 +70,7 @@ else
             exit 1
         fi
     fi
-    if [ -f "/etc/grub2-efi.cfg"]; then
+    if [ -f "/etc/grub2-efi.cfg" ]; then
         grub2-mkconfig -o "$(readlink -e /etc/grub2-efi.cfg)"
         if [[ $? != 0 ]]; then
             echo "GRUB配置更新失败，程序退出。"
