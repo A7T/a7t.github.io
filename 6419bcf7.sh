@@ -48,7 +48,7 @@ if [[ $? != 0 ]]; then
     exit 1
 else
     BAK="/tmp/00_header.$(head -c 6 /dev/random |base64)"
-    echo -n "正在备份 /etc/grub.d/00_header > ${BAK}"
+    echo "正在备份 /etc/grub.d/00_header > ${BAK}"
     cp /etc/grub.d/00_header "${BAK}"
     if [[ $? != 0 ]]; then
         echo "备份失败，程序退出。"
